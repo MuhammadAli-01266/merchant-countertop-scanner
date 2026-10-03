@@ -1,0 +1,6 @@
+{
+  "name": "Merchant Countertop Scanner",
+  "description": "Production-grade countertop QR scanner and loyalty stamp terminal for cafe & merchant staff.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
