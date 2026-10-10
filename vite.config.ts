@@ -1,22 +1,13 @@
-import tailwindcss from '@tailwindcss/vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
-import {defineConfig} from 'vite';
+import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
 
-export default defineConfig(() => {
-  return {
-    plugins: [react(), tailwindcss()],
-    resolve: {
-      alias: {
-        '@': path.resolve(typeof import.meta !== 'undefined' && import.meta.dirname ? import.meta.dirname : __dirname, '.'),
-      },
-    },
-    server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modify—file watching is disabled to prevent flickering during agent edits.
-      hmr: process.env.DISABLE_HMR !== 'true',
-      // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
-      watch: process.env.DISABLE_HMR === 'true' ? null : {},
-    },
-  };
+// Only VITE_* variables reach the browser bundle (Vite's default). Supabase config comes
+// exclusively from VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY; never hard-code keys here.
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+  build: {
+    sourcemap: "hidden",
+    chunkSizeWarningLimit: 600,
+  },
 });
